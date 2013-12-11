@@ -1,6 +1,27 @@
-h1
-	=@topic.title
-p
-	=@topic.description
+.row
+	.small-3.large-7.columns
+		.title
+			h2
+				=link_to @topic.title, topic_path(@topic)
+		p
+			=@topic.description
 
-=link_to "Edit", edit_topic_path(@topic)
+		=link_to "Edit this topic", edit_topic_path(@topic)
+		|  | 
+		=link_to "Create new subtopic", new_topic_subtopic_path(@topic)
+		hr
+		.clearfix
+
+		-@topic.subtopics.each do |subtopic|
+			h4
+				=link_to subtopic.title, subtopic_path(subtopic)
+			p
+				=subtopic.description
+			hr
+
+
+	.small-3.large-offset-1.large-4.columns.side-index
+		-@topic.subtopics.each do |subtopic|
+			h6
+				=link_to subtopic.title, subtopic_path(subtopic)
+			hr

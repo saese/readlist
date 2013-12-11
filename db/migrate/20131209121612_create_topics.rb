@@ -3,12 +3,12 @@ class CreateTopics < ActiveRecord::Migration
     create_table :topics do |t|
       t.string :title
       t.string :description
-      t.string :user
+      t.references :user
 
       t.timestamps
     end
 
-    # add_index :topics, :user_id
+    add_index :topics, :user_id
 
   end
 end

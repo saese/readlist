@@ -1,4 +1,23 @@
-h1
-	=subtopic.title
-p
-	=subtopic.description
+.row
+	.small-3.large-7.columns
+
+		h1
+			=link_to @subtopic.title, subtopic_path(@subtopic)
+		p
+			=@subtopic.description
+
+		=link_to "Edit this subtopic", edit_subtopic_path(@subtopic)
+		|  | 
+		=link_to "Create a new link", new_subtopic_link_path(@subtopic)
+		.clearfix
+		hr
+
+
+		-@subtopic.links.each do |link|
+			=link_to link.title, "http://#{link.hlink}", :target => "_blank"
+			br
+				=link.description
+			br
+				=link_to "edit", edit_link_path(link)
+			hr
+

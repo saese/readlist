@@ -1,0 +1,28 @@
+nav.top-bar data-topbar=""
+	.container
+		ul.title-area
+			li.name
+				h1
+					=link_to "readlist.co", topics_path
+		section.top-bar-section
+			/! Right Nav Section
+			ul.right
+				li
+					=link_to "Create a new topic", new_topic_path
+				li.active
+					=link_to "All topics", topics_path
+				
+				li.has-dropdown
+					-if user_signed_in?
+						=link_to current_user.email
+						ul.dropdown
+							li
+								=link_to "Sign out", destroy_user_session_path(@user), :method => :delete
+					-else
+						li
+							=link_to "Sign in", new_user_session_path
+			/! Left Nav Section
+			ul.left
+				li
+					a href="#"
+

@@ -1,6 +1,8 @@
 -@subtopics.each do |subtopic|
 	br
-		=subtopic.title
+		=link_to subtopic.title, subtopic_path(subtopic)
 	br
 		=subtopic.description
 	hr
+
+=link_to "Create new subtopic", new_topic_subtopic_path(@topic)

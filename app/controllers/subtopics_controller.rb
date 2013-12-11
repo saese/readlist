@@ -1,18 +1,21 @@
 class SubtopicsController < ApplicationController
 
+  before_filter :authenticate_user!, :except => [:index, :show]
+
   def new
     @topic = Topic.find(params[:topic_id])
     @subtopic = @topic.subtopics.new
   end
 
   def index
-    @topic = Subtopic.where(:id => params[:id]).first.topic
+    @topic = Topic.find(params[:topic_id])
     @subtopics = @topic.subtopics.all
   end
 
   def create
-    @topic = Topic.create(topic_params)
-    if @topic.save
+    @topic = Topic.find(params[:topic_id])
+    @subtopic = @topic.subtopics.create(subtopic_params)
+    if @subtopic.save
       flash[:success] = "Topic has been successfully created"
       redirect_to topic_path(@topic)
     else
@@ -22,29 +25,29 @@ class SubtopicsController < ApplicationController
   end
 
   def show
-    @topic = Topic.where(:id => params[:id]).first 
+    @subtopic = Subtopic.where(:id => params[:id]).first 
   end
 
   def edit
-    @topic = Topic.where(:id => params[:id]).first 
+    @subtopic = Subtopic.where(:id => params[:id]).first 
   end
 
   def update
-    @topic = Topic.where(:id => params[:id]).first
-    @topic.update_attributes(topic_params)
-    if @topic.save
-      flash[:success] = "Topic has been successfully updated"
-      redirect_to topic_path(@topic)
+    @subtopic = Subtopic.where(:id => params[:id]).first 
+    @subtopic.update_attributes(subtopic_params)
+    if @subtopic.save
+      flash[:success] = "Subtopic has been successfully updated"
+      redirect_to subtopic_path(@subtopic)
     else
       render "edit"
     end
   end
 
   def destroy
-    @topic = Topic.where(:id => params[:id]).first
-    @topic.destroy
-    flash[:notice] = "Topic deleted"
-    redirect_to topics_path
+    @subtopic = Subtopic.where(:id => params[:id]).first 
+    @subtopic.destroy
+    flash[:notice] = "Subopic deleted"
+    redirect_to subtopics_path
   end
 end
 

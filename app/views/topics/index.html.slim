@@ -1,6 +1,36 @@
--@topics.each do |topic|
-	br
-		=topic.title
-	br
-		=topic.description
-	hr
+.row
+	.topic-post
+		.small-6.large-7.columns
+			-@topics.each do |topic|
+				.title 
+					h2
+						=link_to topic.title, topic_path(topic)
+				
+				table
+					tr
+						td.td-above.td-author
+							div
+								a href="#" rel="author" by John Cena 
+						td.td-above.td-comments
+							div 
+								a href="#" 24 Comments
+
+				p
+					=topic.description
+
+				=link_to "Read more →", topic_path(topic), class:"a more-link"
+				.clearfix
+				hr
+
+		.large-4.columns
+			.panel.welcome
+				h3 Turn your curation into lessons
+				| Already an expert in a topic? 
+				br
+				| Help us educate the world by curating webpages, articles and videos from the web and turning them into structured lessons. 
+				.clearfix
+				br
+
+				=link_to "Sign up now →", new_user_session_path, class:"a more-link"
+		
+

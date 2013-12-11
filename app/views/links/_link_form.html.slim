@@ -1,9 +1,9 @@
-=form_for @link do |f|
-	br
+=form_for [@subtopic, @link] do |f|
+	
 		=f.text_field :title, placeholder: "Link"
-	br
-		=f.text_field :description, placeholder: "Desciption"
-	br
+	
+		=f.text_field :description, type:"text", placeholder: "Description"
+	
 		=f.text_field :hlink, placeholder: "Link to the page"
-	br
-		=f.submit
+	
+		=f.submit "Submit", class: "button tiny"
