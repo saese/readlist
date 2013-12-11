@@ -12,6 +12,12 @@
 
 }
 
+#brand{
+	font-size:18px;
+	font-weight: bold;
+	color: lighten(black, 30%);
+}
+
 .top-bar-section {
 	li a:not(.button) {
 	background: white;
