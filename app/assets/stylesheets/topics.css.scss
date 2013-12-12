@@ -3,10 +3,13 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .container{
-	width: 990px;
+	width: 1200px;
 	margin: 0 auto;
 }
 
+.row{
+	max-width: none;
+}
 .top-bar {
 	background:none;
 
