@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20131210182542) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "links", force: true do |t|
     t.string   "title"
     t.text     "description"
@@ -23,7 +26,7 @@ ActiveRecord::Schema.define(version: 20131210182542) do
     t.datetime "updated_at"
   end
 
-  add_index "links", ["subtopic_id"], name: "index_links_on_subtopic_id"
+  add_index "links", ["subtopic_id"], name: "index_links_on_subtopic_id", using: :btree
 
   create_table "subtopics", force: true do |t|
     t.string   "title"
@@ -34,7 +37,7 @@ ActiveRecord::Schema.define(version: 20131210182542) do
     t.datetime "updated_at"
   end
 
-  add_index "subtopics", ["topic_id"], name: "index_subtopics_on_topic_id"
+  add_index "subtopics", ["topic_id"], name: "index_subtopics_on_topic_id", using: :btree
 
   create_table "topics", force: true do |t|
     t.string   "title"
@@ -44,7 +47,7 @@ ActiveRecord::Schema.define(version: 20131210182542) do
     t.datetime "updated_at"
   end
 
-  add_index "topics", ["user_id"], name: "index_topics_on_user_id"
+  add_index "topics", ["user_id"], name: "index_topics_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -61,7 +64,7 @@ ActiveRecord::Schema.define(version: 20131210182542) do
     t.datetime "updated_at"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 end
