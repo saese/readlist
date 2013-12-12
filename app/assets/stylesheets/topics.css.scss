@@ -18,7 +18,7 @@
 #brand{
 	font-size:18px;
 	font-weight: bold;
-	color: lighten(black, 30%);
+	color: darken(#12dada, 15%);
 }
 
 .top-bar-section {
@@ -28,7 +28,7 @@
 	}
 	ul li > a {
 		font-size: 14px;
-		color:#12dada
+		color:#444444
 	}
 }
 
