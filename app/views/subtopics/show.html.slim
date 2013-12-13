@@ -6,10 +6,16 @@
 		p
 			=@subtopic.description
 
-		=link_to "Edit this subtopic", edit_subtopic_path(@subtopic)
-		|  | 
-		=link_to "Create a new link", new_subtopic_link_path(@subtopic)
-		.clearfix
+		ul.inline-list
+			li
+				=link_to "Back to the topic", topic_path(@subtopic.topic)
+
+			li
+				=link_to "Edit this subtopic", edit_subtopic_path(@subtopic)
+
+			li 
+				=link_to "Create a new link", new_subtopic_link_path(@subtopic)
+			.clearfix
 		hr
 
 

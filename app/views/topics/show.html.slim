@@ -17,6 +17,13 @@
 				=link_to subtopic.title, subtopic_path(subtopic)
 			p
 				=subtopic.description
+			.columns.large-offset-1
+				-subtopic.links.each do |link|
+					=link.title
+					br
+					=link.description
+					br
+					br
 			hr
 
 
