@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(version: 20131210182542) do
 
   create_table "topics", force: true do |t|
     t.string   "title"
-    t.string   "description"
+    t.text   "description"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"

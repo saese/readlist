@@ -1,9 +1,7 @@
 =form_for [@topic, @subtopic] do |f|
 	br
 		=f.text_field :title, placeholder: "Subtopic"
-	br
-		=f.text_field :description, type:"text", placeholder: "Description"
-	br
+		=f.text_field :description, type:"text", placeholder: "Description", class:"textarea"
 		=f.submit "Submit", class: "button tiny"
 
 

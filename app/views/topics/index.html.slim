@@ -1,6 +1,6 @@
 .row
 	.topic-post
-		.small-6.large-7.columns
+		.small-6.large-7.columns.primary
 			-@topics.each do |topic|
 				.title 
 					h2
@@ -17,22 +17,39 @@
 
 				p
 					=topic.description
+				.clearfix
 
 				=link_to "Read more →", topic_path(topic), class:"a more-link"
 				.clearfix
 				hr
 
-		.large-offset-1.large-4.columns
-			.panel.welcome
-				h2
-					strong readList.co
-				h3 Turn your bookmarks into lessons
-				| Already an expert in a topic? Do you bookmark links that you find interesting or useful?
-				p
-				| Turn your bookmarks into lessons for the world to benefit. 
-				.clearfix
-				br
+		.large-offset-2.large-3.columns.secondary
+			-unless user_signed_in?
+				.panel.welcome
+					h2
+						strong readList.co
+					h3 Turn your bookmarks into lessons
+					| Already an expert in a topic? Do you bookmark links that you find interesting or useful?
+					p
+					| Turn your bookmarks into lessons for the world to benefit. 
+					.clearfix
+					br
 
-				=link_to "Sign up now →", new_user_session_path, class:"a more-link"
-		
+					=link_to "Sign up now →", new_user_session_path, class:"a more-link"
+			-else
+				ul.side-nav 
+					br
+					br
+					h5 Popular
+					li.divider
+					li
+						a href="" Bitcoin
+					li.active
+						a href="" Ruby on Rails
+					li
+						a href="" Money and Finance
+					li
+						a href="" Travel and Culture
+
+			
 

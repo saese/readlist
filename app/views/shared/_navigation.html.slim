@@ -10,9 +10,9 @@ nav.top-bar.container data-topbar=""
 			li
 				=link_to "readList.co", topics_path, id: "brand"
 			li
-				=link_to "Create a new topic", new_topic_path
+				=link_to "Create a new readlist", new_topic_path
 			li
-				=link_to "All topics", topics_path
+				=link_to "View all readlists", topics_path
 			
 			li.has-dropdown
 				-if user_signed_in?

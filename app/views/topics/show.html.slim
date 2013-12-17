@@ -2,7 +2,10 @@
 	.small-3.large-7.columns
 		.title
 			h2
-				=link_to @topic.title, topic_path(@topic)
+				=link_to @topic.title, topic_path(@topic), class:"margin-on-right"
+				=link_to edit_topic_path(@topic) do
+					small
+						i.fi-page-edit
 		p
 			=@topic.description
 
@@ -12,19 +15,29 @@
 		hr
 		.clearfix
 
-		-@topic.subtopics.each do |subtopic|
-			h4
-				=link_to subtopic.title, subtopic_path(subtopic)
-			p
-				=subtopic.description
-			.columns.large-offset-1
-				-subtopic.links.each do |link|
-					=link.title
-					br
-					=link.description
-					br
-					br
-			hr
+		ul.no-bullet#sortable.spaced-at-left
+			-@topic.subtopics.each do |subtopic|
+				li
+					h3
+						strong
+							i.fi-book.margin-on-right
+							=link_to subtopic.title, subtopic_path(subtopic)
+
+					p
+						=subtopic.description
+
+					i.fi-list.margin-on-right
+						span.margin-on-left Show links
+						br
+						.show-links.spaced-at-left
+							-subtopic.links.each do |link|
+								h5
+									strong
+										=link_to link.title, "http://#{link.hlink}", :target => "_blank"
+								=link.description
+								hr
+					hr
+				
 
 
 	.small-3.large-offset-2.large-3.columns.side-index

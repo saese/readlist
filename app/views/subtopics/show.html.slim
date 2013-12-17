@@ -1,29 +1,32 @@
 .row
 	.small-3.large-7.columns
 
-		h1
-			=link_to @subtopic.title, subtopic_path(@subtopic)
+		h2
+			strong
+				=link_to @subtopic.title, subtopic_path(@subtopic), class:"margin-on-right"
+				=link_to edit_subtopic_path(@subtopic) do
+					small
+						i.fi-page-edit
 		p
 			=@subtopic.description
 
 		ul.inline-list
 			li
-				=link_to "Back to the topic", topic_path(@subtopic.topic)
-
-			li
-				=link_to "Edit this subtopic", edit_subtopic_path(@subtopic)
+				=link_to "Back", topic_path(@subtopic.topic)
 
 			li 
 				=link_to "Create a new link", new_subtopic_link_path(@subtopic)
 			.clearfix
 		hr
 
-
-		-@subtopic.links.each do |link|
-			=link_to link.title, "http://#{link.hlink}", :target => "_blank"
-			br
-				=link.description
-			br
-				=link_to "edit", edit_link_path(link)
-			hr
+		.spaced-at-left
+			-@subtopic.links.each do |link|
+				h6
+					strong
+						=link_to link.title , "http://#{link.hlink}", :target => "_blank", class:"margin-on-right"
+					=link_to edit_link_path(link) do
+						i.fi-page-edit
+				br
+					=link.description
+				hr
 

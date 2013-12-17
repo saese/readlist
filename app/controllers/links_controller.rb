@@ -37,7 +37,7 @@ class LinksController < ApplicationController
     @link.update_attributes(link_params)
     if @link.save
       flash[:success] = "Link has been successfully updated"
-      redirect_to link_path(@link)
+      redirect_to subtopic_path(@link.subtopic)
     else
       render "edit"
     end
