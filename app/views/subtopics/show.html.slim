@@ -1,37 +1,38 @@
 .row
-	.small-3.large-offset-1.large-6.columns
+	.content
+		.large-offset-3.large-6.columns
 
-		h2
-			strong
-				=link_to @subtopic.title, subtopic_path(@subtopic), class:"margin-on-right"
-				=link_to edit_subtopic_path(@subtopic) do
-					small
-						i.fi-page-edit
-		p
-			=@subtopic.description
-		br
-		ul.inline-list
-			li
-				=link_to "Back", topic_path(@subtopic.topic)
+			h2
+				strong
+					=link_to @subtopic.title, subtopic_path(@subtopic), class:"margin-on-right"
+					=link_to edit_subtopic_path(@subtopic) do
+						small
+							i.fi-page-edit
+			p
+				=@subtopic.description
+			br
+			ul.inline-list
+				li
+					=link_to "Back", topic_path(@subtopic.topic)
 
-			li 
-				=link_to "Create a new link", new_subtopic_link_path(@subtopic)
-			.clearfix
-		hr
+				li 
+					=link_to "Create a new link", new_subtopic_link_path(@subtopic)
+				.clearfix
+			hr
 
-		.spaced-at-left
-			-@subtopic.links.each do |link|
-				h6
-					strong
-						=link_to link.title , "http://#{link.hlink}", :target => "_blank", class:"margin-on-right"
-					=link_to edit_link_path(link) do
-						i.fi-page-edit
-				br
-					=link.description
-				hr
-	.small-3.large-offset-1.large-2.columns.side-index
-		-@subtopic.topic.subtopics.each do |subtopic|
-			h6.subheading
-				=link_to subtopic.title, subtopic_path(subtopic)
-				hr
+			.spaced-at-left
+				-@subtopic.links.each do |link|
+					h6
+						strong
+							=link_to link.title , "http://#{link.hlink}", :target => "_blank", class:"margin-on-right"
+						=link_to edit_link_path(link) do
+							i.fi-page-edit
+					br
+						=link.description
+					hr
+		.small-3.large-offset-1.large-2.columns.side-index
+			-@subtopic.topic.subtopics.each do |subtopic|
+				h6.subheading
+					=link_to subtopic.title, subtopic_path(subtopic)
+					hr
 

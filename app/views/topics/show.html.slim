@@ -1,46 +1,47 @@
 .row
-	.small-3.large-offset-1.large-6.columns
-		.title
-			h2
-				=link_to @topic.title, topic_path(@topic), class:"margin-on-right"
-				=link_to edit_topic_path(@topic) do
-					small
-						i.fi-page-edit
-		p
-			=@topic.description
-		br
-		=link_to "Create new subtopic", new_topic_subtopic_path(@topic)
-		hr
-		
+	.content
+		.large-offset-3.large-6.columns
+			.title
+				h2
+					=link_to @topic.title, topic_path(@topic), class:"margin-on-right"
+					=link_to edit_topic_path(@topic) do
+						small
+							i.fi-page-edit
+			p
+				=@topic.description
+			br
+			=link_to "Create new subtopic", new_topic_subtopic_path(@topic)
+			hr
+			
 
-		.clearfix
+			.clearfix
 
-		ul.no-bullet#sortable.spaced-at-left
-			-@topic.subtopics.each do |subtopic|
-				li
-					h3
-						strong
-							=link_to subtopic_path(subtopic) do
-								i.fi-book.margin-on-right
-							=link_to subtopic.title, subtopic_path(subtopic)
+			ul.no-bullet#sortable.spaced-at-left
+				-@topic.subtopics.each do |subtopic|
+					li
+						h3
+							strong
+								=link_to subtopic_path(subtopic) do
+									i.fi-book.margin-on-right
+								=link_to subtopic.title, subtopic_path(subtopic)
 
-					p
-						=subtopic.description
+						p
+							=subtopic.description
 
-					i.fi-list.margin-on-right
-						span.margin-on-left Show links
-						br
-						.show-links.spaced-at-left
-							-subtopic.links.each do |link|
-								h5
-									strong
-										=link_to link.title, "http://#{link.hlink}", :target => "_blank"
-								=link.description
-								hr
-					hr
-				
+						i.fi-list.margin-on-right.text-muted
+							span.margin-on-left Show links
+							br
+							.show-links.spaced-at-left
+								-subtopic.links.each do |link|
+									h5
+										strong
+											=link_to link.title, "http://#{link.hlink}", :target => "_blank"
+									p=link.description
+									hr
+						hr
+					
 
 
-	.small-3.large-offset-1.large-2.columns.side-index
-		h6.subheading
-			=@topic.user.email
+		.small-3.large-offset-1.large-2.columns.side-index
+			h6.subheading
+				=@topic.user.email

@@ -35,22 +35,29 @@
 	ul.side-nav
 		li
 			=link_to image_tag("readlistlogo.png", size: "60x57"), topics_path
-		li.divider
+			br
 		li 
 			=link_to "all readlists", topics_path
 		li
 			=link_to "create new", new_topic_path
 		li
-			=link_to "about"
-		li.divider
+			-if user_signed_in?
+				=link_to "Sign out", destroy_user_session_path(@user), :method => :delete
+			-else
+				=link_to "Sign in", new_user_registration_path
+
+		li.divider		
 		li 
 			=link_to "@readlistco"
 		li 
 			=link_to "say hi"
 		li.divider
+		br
+		li 
+			h5
+				strong readList.co
 		li
-			-if user_signed_in?
-				=link_to "Sign out", destroy_user_session_path(@user), :method => :delete
-			-else
-				=link_to "Sign in", new_user_session_path
+			=link_to "Sign up now →", new_user_registration_path
+
+		
 

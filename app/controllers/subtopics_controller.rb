@@ -1,6 +1,7 @@
 class SubtopicsController < ApplicationController
 
   before_filter :authenticate_user!, :except => [:index, :show]
+  before_filter :correct_user, :except => [:index, :show]
 
   def new
     @topic = Topic.find(params[:topic_id])
@@ -54,3 +55,9 @@ end
 def subtopic_params
   params.require(:subtopic).permit(:title, :description, :lesson_number)
 end
+
+# def correct_user
+#   @topic = Topic.where(:id => params[:topic_id])
+
+# end
+

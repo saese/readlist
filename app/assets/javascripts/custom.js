@@ -16,3 +16,9 @@ $(function() {
 
 
 });
+
+$("i.fi-x").click(function(){
+	$("#welcome").fadeOut("slow");
+});
+
+$('.infinite-scroll').jscroll();
