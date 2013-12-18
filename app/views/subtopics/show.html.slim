@@ -1,5 +1,5 @@
 .row
-	.small-3.large-7.columns
+	.small-3.large-offset-1.large-6.columns
 
 		h2
 			strong
@@ -9,7 +9,7 @@
 						i.fi-page-edit
 		p
 			=@subtopic.description
-
+		br
 		ul.inline-list
 			li
 				=link_to "Back", topic_path(@subtopic.topic)
@@ -28,5 +28,10 @@
 						i.fi-page-edit
 				br
 					=link.description
+				hr
+	.small-3.large-offset-1.large-2.columns.side-index
+		-@subtopic.topic.subtopics.each do |subtopic|
+			h6.subheading
+				=link_to subtopic.title, subtopic_path(subtopic)
 				hr
 

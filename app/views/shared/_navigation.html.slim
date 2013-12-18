@@ -1,31 +1,56 @@
-nav.top-bar.container data-topbar=""
+/ nav.top-bar.container data-topbar=""
 	
-	/ ul.title-area
-	/ 	li.name
-	/ 		h1
-	/ 			=link_to "readList.co", topics_path, id: "brand"
-	section.top-bar-section
-		/! Right Nav Section
-		ul.right
-			li
-				=link_to "readList.co", topics_path, id: "brand"
-			li
-				=link_to "Create a new readlist", new_topic_path
-			li
-				=link_to "View all readlists", topics_path
+/ 	/ ul.title-area
+/ 	/ 	li.name
+/ 	/ 		h1
+/ 	/ 			=link_to "readList.co", topics_path, id: "brand"
+/ 	section.top-bar-section
+/ 		/! Right Nav Section
+/ 		ul.right
+/ 			li
+/ 				=link_to "readList.co", topics_path, id: "brand"
+/ 			li
+/ 				=link_to "Create a new readlist", new_topic_path
+/ 			li
+/ 				=link_to "View all readlists", topics_path
 			
-			li.has-dropdown
-				-if user_signed_in?
-					=link_to "Sign out", destroy_user_session_path(@user), :method => :delete
-					/ =link_to current_user.email
-					/ ul.dropdown
-					/ 	li
-					/ 		=link_to "Sign out", destroy_user_session_path(@user), :method => :delete
-				-else
-					li
-						=link_to "Sign in", new_user_session_path
-		/! Left Nav Section
-		/ ul.left
-		/ 	li
-		/ 		a href="#"
+/ 			li.has-dropdown
+/ 				-if user_signed_in?
+/ 					=link_to "Sign out", destroy_user_session_path(@user), :method => :delete
+/ 					/ =link_to current_user.email
+/ 					/ ul.dropdown
+/ 					/ 	li
+/ 					/ 		=link_to "Sign out", destroy_user_session_path(@user), :method => :delete
+/ 				-else
+/ 					li
+/ 						=link_to "Sign in", new_user_session_path
+/ 		/! Left Nav Section
+/ 		/ ul.left
+/ 		/ 	li
+/ 		/ 		a href="#"
+
+
+
+.large-2.columns.side-border
+	ul.side-nav
+		li
+			=link_to image_tag("readlistlogo.png", size: "60x57"), topics_path
+		li.divider
+		li 
+			=link_to "all readlists", topics_path
+		li
+			=link_to "create new", new_topic_path
+		li
+			=link_to "about"
+		li.divider
+		li 
+			=link_to "@readlistco"
+		li 
+			=link_to "say hi"
+		li.divider
+		li
+			-if user_signed_in?
+				=link_to "Sign out", destroy_user_session_path(@user), :method => :delete
+			-else
+				=link_to "Sign in", new_user_session_path
 
