@@ -42,7 +42,7 @@
 			h5 
 				strong Most Popular
 			
-			-@topics.each do |topic|
+			-@topics.limit(15).each do |topic|
 				h6.subheading
 					=link_to topic.title, topic_path(topic)
 					hr
