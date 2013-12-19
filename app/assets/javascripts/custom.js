@@ -10,8 +10,13 @@ $("i.fi-list").click(function(){
 
 
 $(function() {
-    $( "#sortable" ).sortable();
-    $( "#sortable" ).disableSelection();
+    $( "#subtopics" ).sortable({
+    	update: function(){
+    		alert("updated")}
+
+    });
+
+    $( "#subtopics" ).disableSelection();
   });
 
 
@@ -20,5 +25,3 @@ $(function() {
 $("i.fi-x").click(function(){
 	$("#welcome").fadeOut("slow");
 });
-
-$('.infinite-scroll').jscroll();

@@ -1,7 +1,8 @@
 class SubtopicsController < ApplicationController
 
   before_filter :authenticate_user!, :except => [:index, :show]
-  before_filter :correct_user, :except => [:index, :show]
+  before_filter :correct_user_edit, :except => [:index, :show, :new, :create]
+  before_filter :correct_user_new, :only => [:new, :create]
 
   def new
     @topic = Topic.find(params[:topic_id])
@@ -47,8 +48,8 @@ class SubtopicsController < ApplicationController
   def destroy
     @subtopic = Subtopic.where(:id => params[:id]).first 
     @subtopic.destroy
-    flash[:notice] = "Subopic deleted"
-    redirect_to subtopics_path
+    flash[:notice] = "Subtopic deleted"
+    redirect_to topic_path(@subtopic.topic)
   end
 end
 
@@ -57,14 +58,14 @@ def subtopic_params
   params.require(:subtopic).permit(:title, :description, :lesson_number)
 end
 
-def correct_user
+def correct_user_new
+  @topic = Topic.where(:id => params[:topic_id]).first 
+  raise "User not permitted" unless @topic.user==current_user
+end
+
+def correct_user_edit
   @subtopic = Subtopic.where(:id => params[:id]).first 
-  if @subtopic.nil?
-    @topic = Topic.where(:id => params[:topic_id]).first 
-    raise "User not permitted" unless @topic.user==current_user
-  else
-    raise "User not permitted" unless @subtopic.topic.user == current_user
-  end
+  raise "User not permitted" unless @subtopic.topic.user == current_user
 end
 
  

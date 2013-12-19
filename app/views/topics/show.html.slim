@@ -6,7 +6,10 @@
 					=link_to @topic.title, topic_path(@topic), class:"margin-on-right"
 					=link_to edit_topic_path(@topic) do
 						small
-							i.fi-page-edit
+							i.fi-page-edit.margin-on-right
+					=link_to topic_path(@topic), :method => :delete, :confirm => "Are you sure?" do
+						small
+							i.fi-trash
 			p
 				=@topic.description
 			br
@@ -16,9 +19,9 @@
 
 			.clearfix
 
-			ul.no-bullet#sortable.spaced-at-left
+			ul.no-bullet#subtopics.spaced-at-left
 				-@topic.subtopics.each do |subtopic|
-					li
+					=content_tag_for :li, subtopic do
 						h3
 							strong
 								=link_to subtopic_path(subtopic) do
