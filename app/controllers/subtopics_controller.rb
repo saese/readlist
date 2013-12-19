@@ -52,12 +52,19 @@ class SubtopicsController < ApplicationController
   end
 end
 
+private
 def subtopic_params
   params.require(:subtopic).permit(:title, :description, :lesson_number)
 end
 
-# def correct_user
-#   @topic = Topic.where(:id => params[:topic_id])
+def correct_user
+  @subtopic = Subtopic.where(:id => params[:id]).first 
+  if @subtopic.nil?
+    @topic = Topic.where(:id => params[:topic_id]).first 
+    raise "User not permitted" unless @topic.user==current_user
+  else
+    raise "User not permitted" unless @subtopic.topic.user == current_user
+  end
+end
 
-# end
-
+ 
