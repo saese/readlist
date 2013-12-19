@@ -4,16 +4,18 @@
 			.title
 				h2
 					=link_to @topic.title, topic_path(@topic), class:"margin-on-right"
-					=link_to edit_topic_path(@topic) do
-						small
-							i.fi-page-edit.margin-on-right
-					=link_to topic_path(@topic), :method => :delete, :confirm => "Are you sure?" do
-						small
-							i.fi-trash
+					-if @topic.user.id == current_user.id
+						=link_to edit_topic_path(@topic) do
+							small
+								i.fi-page-edit.margin-on-right
+						=link_to topic_path(@topic), :method => :delete, :confirm => "Are you sure?" do
+							small
+								i.fi-trash
 			p
 				=@topic.description
 			br
-			=link_to "Create new subtopic", new_topic_subtopic_path(@topic)
+			-if @topic.user.id == current_user.id
+				=link_to "Create new subtopic", new_topic_subtopic_path(@topic)
 			hr
 			
 

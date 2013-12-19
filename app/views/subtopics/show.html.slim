@@ -5,12 +5,13 @@
 			h2
 				strong
 					=link_to @subtopic.title, subtopic_path(@subtopic), class:"margin-on-right"
-					=link_to edit_subtopic_path(@subtopic) do
-						small
-							i.fi-page-edit.margin-on-right
-					=link_to subtopic_path(@subtopic), :method => :delete, :confirm => "Are you sure?", class:"margin-on-right" do
-						small
-							i.fi-trash
+					-if @subtopic.topic.user.id == current_user.id
+						=link_to edit_subtopic_path(@subtopic) do
+							small
+								i.fi-page-edit.margin-on-right
+						=link_to subtopic_path(@subtopic), :method => :delete, :confirm => "Are you sure?", class:"margin-on-right" do
+							small
+								i.fi-trash
 			p
 				=@subtopic.description
 			br
@@ -19,7 +20,8 @@
 					=link_to "Back", topic_path(@subtopic.topic)
 
 				li 
-					=link_to "Create a new link", new_subtopic_link_path(@subtopic)
+					-if @subtopic.topic.user.id == current_user.id
+						=link_to "Create a new link", new_subtopic_link_path(@subtopic)
 				.clearfix
 			hr
 
@@ -28,10 +30,11 @@
 					h6
 						strong
 							=link_to link.title , "http://#{link.hlink}", :target => "_blank", class:"margin-on-right"
-						=link_to edit_link_path(link) do
-							i.fi-page-edit.margin-on-right
-						=link_to link_path(link), :method => :delete, :confirm => "Are you sure?" do
-							i.fi-trash
+						-if link.subtopic.topic.user.id == current_user.id
+							=link_to edit_link_path(link) do
+								i.fi-page-edit.margin-on-right
+							=link_to link_path(link), :method => :delete, :confirm => "Are you sure?" do
+								i.fi-trash
 					br
 						=link.description
 					hr
