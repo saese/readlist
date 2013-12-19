@@ -9,6 +9,7 @@ Rlist::Application.routes.draw do
 
   resources :subtopics do
     resources :links, shallow: true
+    collection {post :sort}
   end
 
   resources :links

@@ -1,27 +1,22 @@
 jQuery(function($){
 
+	$(".show-links").hide();
 
-$(".show-links").hide();
-
-$("i.fi-list").click(function(){
-	
-	$(this).children(".show-links").slideToggle();
-});
+	$("i.fi-list").click(function(){
+		$(this).children(".show-links").slideToggle();
+	});
 
 
-$(function() {
-    $( "#subtopics" ).sortable({
-    	update: function(){
-    		alert("updated")}
 
-    });
-
-    $( "#subtopics" ).disableSelection();
-  });
+  	$('#subtopics').sortable({
+    	update: function() {
+      		return $.post($(this).data('update-url'), $(this).sortable('serialize'));
+    	}
+ 	});
 
 
-});
+	$("i.fi-x").click(function(){
+		$("#welcome").fadeOut("slow");
+	});
 
-$("i.fi-x").click(function(){
-	$("#welcome").fadeOut("slow");
 });

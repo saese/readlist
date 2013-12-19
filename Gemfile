@@ -13,6 +13,7 @@ gem 'devise'
 gem 'foundation-rails'
 gem 'foundation-icons-sass-rails'
 gem 'jquery-ui-rails'
+gem 'acts_as_list'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'

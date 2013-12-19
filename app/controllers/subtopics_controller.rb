@@ -1,7 +1,7 @@
 class SubtopicsController < ApplicationController
 
   before_filter :authenticate_user!, :except => [:index, :show]
-  before_filter :correct_user_edit, :except => [:index, :show, :new, :create]
+  before_filter :correct_user_edit, :except => [:index, :show, :new, :create, :sort]
   before_filter :correct_user_new, :only => [:new, :create]
 
   def new
@@ -11,7 +11,8 @@ class SubtopicsController < ApplicationController
 
   def index
     @topic = Topic.find(params[:topic_id])
-    @subtopics = @topic.subtopics.all
+    @subtopics = @topic.subtopics
+    @subtopics.order("position ASC")
   end
 
   def create
@@ -23,7 +24,6 @@ class SubtopicsController < ApplicationController
     else
       redirect_to "new"
     end
-
   end
 
   def show
@@ -51,6 +51,14 @@ class SubtopicsController < ApplicationController
     flash[:notice] = "Subtopic deleted"
     redirect_to topic_path(@subtopic.topic)
   end
+
+  def sort
+    params[:subtopic].each_with_index do |id, index|
+      Subtopic.update_all({position: index+1}, {id: id})
+    end
+    render nothing: true
+  end
+
 end
 
 private
@@ -67,5 +75,3 @@ def correct_user_edit
   @subtopic = Subtopic.where(:id => params[:id]).first 
   raise "User not permitted" unless @subtopic.topic.user == current_user
 end
-
- 

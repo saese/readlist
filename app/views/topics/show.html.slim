@@ -19,7 +19,7 @@
 
 			.clearfix
 
-			ul.no-bullet#subtopics.spaced-at-left
+			ul.no-bullet#subtopics.spaced-at-left data-update-url=(sort_subtopics_url)
 				-@topic.subtopics.each do |subtopic|
 					=content_tag_for :li, subtopic do
 						h3
