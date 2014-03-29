@@ -1,7 +1,6 @@
 class SubtopicsController < ApplicationController
 
   before_filter :authenticate_user!, :except => [:index, :show]
-  before_filter :correct_user, :except => [:index, :show]
 
   def new
     @topic = Topic.find(params[:topic_id])
