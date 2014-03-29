@@ -8,19 +8,17 @@ class TopicsController < ApplicationController
   end
 
   def new
-    @user = current_user
-    @topic = @user.topics.new
-
+    @topic = Topic.new
   end
 
   def create
-    @user = current_user
-    @topic = @user.topics.create(topic_params)
+    @topic = Topic.create(topic_params)
+    @topic.user_id = current_user.id
     if @topic.save
       flash[:success] = "Topic has been successfully created"
       redirect_to topic_path(@topic)
     else
-      redirect_to "new"
+      render "new"
     end
   end
 
@@ -29,19 +27,16 @@ class TopicsController < ApplicationController
   end
 
   def edit
-    @topic = current_user.topics.where(:id => params[:id]).first
-    if @topic.nil?
+    @topic = Topic.where(:id => params[:id]).first 
+    unless (@topic and @topic.user_id == current_user.id)
       flash[:notice] = "You must be signed in to make changes"
       redirect_to topics_path
     end
   end
 
   def update
-    @topic = current_user.topics.where(:id => params[:id]).first
-    if @topic.nil?
-      flash[:notice] = "You must be signed in to make changes"
-      redirect_to topics_path
-    else
+    @topic = Topic.where(:id => params[:id]).first 
+    if @topic and @topic.user_id == current_user.id
       @topic.update_attributes(topic_params)
       if @topic.save
         flash[:success] = "Topic has been successfully updated"
@@ -49,22 +44,25 @@ class TopicsController < ApplicationController
       else
         render "edit"
       end
+    else
+      flash[:notice] = "You must be signed in to make changes"
+      redirect_to topics_path
     end
   end
 
   def destroy
-    @topic = current_user.topics.where(:id => params[:id]).first
-    if @topic.nil?
-      flash[:notice] = "You must be signed in to make changes"
-      redirect_to topics_path
-    else
+    @topic = Topic.where(:id => params[:id]).first 
+    if @topic and @topic.id == current_user.id   
       @topic.destroy
       flash[:notice] = "Topic deleted"
       redirect_to topics_path
+    else
+      flash[:notice] = "You must be signed in to make changes"
+      redirect_to topics_path
+
     end
   end
-end
 
-def topic_params
-  params.require(:topic).permit(:title, :description, :user)
+  private
+
 end

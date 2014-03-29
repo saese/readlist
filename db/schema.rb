@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131219210313) do
+ActiveRecord::Schema.define(version: 20140328102432) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 20131219210313) do
     t.integer  "subtopic_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "user_id"
   end
 
   add_index "links", ["subtopic_id"], name: "index_links_on_subtopic_id", using: :btree
@@ -36,6 +37,7 @@ ActiveRecord::Schema.define(version: 20131219210313) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "position"
+    t.string   "user_id"
   end
 
   add_index "subtopics", ["topic_id"], name: "index_subtopics_on_topic_id", using: :btree

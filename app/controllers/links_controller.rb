@@ -1,29 +1,30 @@
 class LinksController < ApplicationController
 
   before_filter :authenticate_user!, :except => [:index, :show]
-  before_filter :correct_user_edit, :except => [:index, :show, :new, :create]
-  before_filter :correct_user_new, :only => [:new, :create]
+  before_filter :correct_user, :except => [:index, :show]
+
   
   def new
     @subtopic = Subtopic.find(params[:subtopic_id])
-    @link = @subtopic.links.new
-  end
-
-  def index
-    @subtopic = Subtopic.find(params[:subtopic_id])
-    @links = @subtopic.links.all
+    @link = Link.new
   end
 
   def create
     @subtopic = Subtopic.find(params[:subtopic_id])
-    @link = @subtopic.links.create(link_params)
-    if @link.save
+    @link = Link.create(link_params)
+    @link.subtopic_id, @link.user_id  = @subtopic.id, current_user.id
+
+    if @subtopic.user_id == current_user.id and @link.save
       flash[:success] = "Link has been successfully created"
       redirect_to subtopic_path(@subtopic)
     else
       redirect_to "new"
     end
+  end
 
+  def index
+    @subtopic = Subtopic.find(params[:subtopic_id])
+    @links = @subtopic.links.all
   end
 
   def show
@@ -37,7 +38,7 @@ class LinksController < ApplicationController
   def update
     @link = Link.where(:id => params[:id]).first 
     @link.update_attributes(link_params)
-    if @link.save
+    if @link.user_id == current_user.id and @link.save
       flash[:success] = "Link has been successfully updated"
       redirect_to subtopic_path(@link.subtopic)
     else
@@ -47,23 +48,16 @@ class LinksController < ApplicationController
 
   def destroy
     @link = Link.where(:id => params[:id]).first 
-    @link.destroy
+    @link.destroy if @link.user_id == current_user.id
     flash[:notice] = "Link deleted"
     redirect_to subtopic_path(@link.subtopic)
   end
+
+  private
+    def link_params
+      params.require(:link).permit(:title, :description, :hlink, :serial_number)
+    end
 end
 
-private
-def link_params
-  params.require(:link).permit(:title, :description, :hlink, :serial_number)
-end
 
-def correct_user_new
-  @subtopic = Subtopic.where(:id => params[:subtopic_id]).first 
-  raise "User not permitted" unless @subtopic.topic.user==current_user
-end
 
-def correct_user_edit
-  @link = Link.where(:id => params[:id]).first 
-  raise "User not permitted" unless @link.subtopic.topic.user == current_user
-end
